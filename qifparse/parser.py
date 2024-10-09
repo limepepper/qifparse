@@ -334,6 +334,10 @@ class QifParser(object):
              or, (Paypal 2011) like "3/2/2011".
         ISO is like   YYYY-MM-DD  I think @@check
         """
+        try:
+            return datetime.strptime(qdate, '%Y-%m-%d')
+        except ValueError:
+            pass
         if qdate[1] == "/":
             qdate = "0" + qdate   # Extend month to 2 digits
         if qdate[4] == "/":
