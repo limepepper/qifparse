@@ -342,6 +342,8 @@ class QifParser(object):
             if qdate[i] == " ":
                 qdate = qdate[:i] + "0" + qdate[i+1:]
         if len(qdate) == 10:  # new form with YYYY date
+            if qdate[4] == "-" and qdate[7] == "-": # already in ISO format
+                return datetime.strptime(qdate, '%Y-%m-%d')
             iso_date = qdate[6:10] + "-" + qdate[3:5] + "-" + qdate[0:2]
             return datetime.strptime(iso_date, '%Y-%m-%d')
         if qdate[5] == "'":
